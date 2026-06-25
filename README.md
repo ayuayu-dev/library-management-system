@@ -33,7 +33,7 @@ Laravelの学習を目的として制作しました。
 
 ログイン前のトップ画面です。
 
-![トップページ](images/top.png)
+![トップページ](images/readme_top.png)
 
 ---
 
@@ -41,7 +41,7 @@ Laravelの学習を目的として制作しました。
 
 本の管理や貸出・返却など、主要機能へアクセスできます。
 
-![ダッシュボード](images/dashboard.png)
+![ダッシュボード](images/readme_dashboard.png)
 
 ---
 
@@ -49,7 +49,7 @@ Laravelの学習を目的として制作しました。
 
 検索機能・ページネーション・冊子管理に対応しています。
 
-![書籍一覧](images/books.png)
+![書籍一覧](images/readme_books.png)
 
 ---
 
@@ -57,7 +57,7 @@ Laravelの学習を目的として制作しました。
 
 冊子番号を入力して貸出・返却を行えます。
 
-![貸出・返却](images/loan.png)
+![貸出・返却](images/readme_loan.png)
 
 ---
 

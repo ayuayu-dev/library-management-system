@@ -15,22 +15,32 @@ class BookController extends Controller
     // 一覧
     public function index(Request $request)
     {
+        //検索キーワード取得
         $keyword = $request->input('keyword');
 
+        //booksテーブルからデータ取得（子テーブルのbooks_items情報も一緒に取得）
         $books = Book::with('booksItems')
+            //検索キーワードが入力されている時のみwhere文を付与
             ->when($keyword, function ($query, $keyword) {
+                //タイトルを部分一致検索する
                 $query->where('title', 'like', "%{$keyword}%");
             })
+            //登録日時順（created_at）に表示する
             ->orderByDesc('created_at')
+            //1ページに30件表示する
             ->paginate(30)
             ->withQueryString();
 
+        //Vue(Books/Index)へデータを渡して画面を表示
         return Inertia::render('Books/Index', [
+            //booksテーブルから取得したデータ
             'books' => $books,
+            //パンくずリスト
             'breadcrumbs' => [
                 ['label' => 'ダッシュボード', 'url' => route('dashboard')],
                 ['label' => '書籍一覧'],
             ],
+            //検索キーワード
             'filters' => [
                 'keyword' => $keyword,
             ],
@@ -97,18 +107,18 @@ class BookController extends Controller
     }
 
     // 編集画面
-public function edit(Book $book)
-{
-    return Inertia::render('Books/Edit', [
-        'book' => $book,
-        'breadcrumbs' => [
-            ['label' => 'ダッシュボード', 'url' => route('dashboard')],
-            ['label' => '書籍一覧', 'url' => route('books.index')],
-            ['label' => '書籍を編集'],
-        ],
-        'categories' => Category::all(),
-    ]);
-}
+    public function edit(Book $book)
+    {
+        return Inertia::render('Books/Edit', [
+            'book' => $book,
+            'breadcrumbs' => [
+                ['label' => 'ダッシュボード', 'url' => route('dashboard')],
+                ['label' => '書籍一覧', 'url' => route('books.index')],
+                ['label' => '書籍を編集'],
+            ],
+            'categories' => Category::all(),
+        ]);
+    }
 
     // 更新処理
     public function update(Request $request, Book $book)

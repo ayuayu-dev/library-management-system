@@ -19,6 +19,7 @@ const isOpen = (bookId: number) => {
   return openBooks.value.includes(bookId)
 }
 
+//Controllerから受け取るデータを定義する
 const props = defineProps<{
   books: {
     data: any[]
@@ -30,10 +31,12 @@ const props = defineProps<{
   }
 }>()
 
+//検索フォームに入力されたキーワードを取得する
 const form = useForm({
   keyword: props.filters?.keyword ?? '',
 })
 
+//検索ボタンを押したら books.index にGET送信する
 const search = () => {
   form.get(route('books.index'), {
     preserveState: true,
